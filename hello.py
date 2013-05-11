@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 import re
+import WeatherHacks
 print("メッセージを入力すると適当な回答を行います。")
 print("終了したいときは「さようなら」と入力してください")
 
@@ -27,7 +28,11 @@ while not quit:
 		else:
 			print("知りませんそんなこと")
 
-	if message=="おはよう" and not res:
+	#天気予報がある地域名ならば、天気予報を答える
+	if WeatherHacks.isWeatherCity(message):
+    	    res=True
+    	    WeatherHacks.WeatherReport(message)
+	elif message=="おはよう" and not res:
 		res=True
 		print("おはようございます")
 	elif message=="こんにちは":
